@@ -1,13 +1,20 @@
 <script lang="ts">
-	import { projects } from '$lib/projects/projects';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+	const projects = $derived(data.projects);
 </script>
+
+<svelte:head>
+	<title>Portfolio</title>
+</svelte:head>
 
 <div class="container mx-auto max-w-6xl border-solid border-black p-4">
 	<h1 class="pb-4 text-center text-6xl">Portfolio</h1>
 
 	<div class="grid grid-cols-1 md:grid-cols-3">
 		{#each projects as project}
-			<a href={project.repository} target="_blank">
+			<a href={`./project/${project.id}`}>
 				<div
 					class="relative m-2 aspect-video rounded-lg border border-gray-200 p-4 shadow transition hover:bg-gray-300"
 				>
